@@ -1132,6 +1132,7 @@ struct IMGUI_API ImGuiInputTextState
     bool                    ReloadUserBuf;          // force a reload of user buf so it may be modified externally. may be automatic in future version.
     int                     ReloadSelectionStart;   // POSITIONS ARE IN IMWCHAR units *NOT* UTF-8 this is why this is not exposed yet.
     int                     ReloadSelectionEnd;
+    float                   WordWrapWidth;          // Experimental word wrapping feature - see: https://github.com/ocornut/imgui/issues/3237#issuecomment-1435345204
 
     ImGuiInputTextState();
     ~ImGuiInputTextState();
@@ -1149,6 +1150,9 @@ struct IMGUI_API ImGuiInputTextState
     int         GetSelectionStart() const;
     int         GetSelectionEnd() const;
     void        SelectAll();
+
+    // Experimental
+    bool        HasWordWrap() const { return WordWrapWidth > 0.0; }
 
     // Reload user buf (WIP #2890)
     // If you modify underlying user-passed const char* while active you need to call this (InputText V2 may lift this)
